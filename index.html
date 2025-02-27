@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .container {
+        text-align: center;
+        color: white;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 1s ease-out forwards;
+      }
+
+      .checkmark {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 30px;
+        position: relative;
+      }
+
+      .checkmark__circle {
+        stroke-dasharray: 166;
+        stroke-dashoffset: 166;
+        stroke-width: 2;
+        stroke: #4ade80;
+        fill: none;
+        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+      }
+
+      .checkmark__check {
+        transform-origin: 50% 50%;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        stroke: #4ade80;
+        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards,
+          scale 0.3s ease-in-out 0.9s both;
+      }
+
+      h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+        opacity: 0;
+        animation: textFade 0.5s ease-out 1.2s forwards;
+      }
+
+      p {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+        opacity: 0;
+        animation: textFade 0.5s ease-out 1.5s forwards;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 15px 40px;
+        background: #4ade80;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: btnFade 0.5s ease-out 1.8s forwards;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes stroke {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      @keyframes scale {
+        0%,
+        100% {
+          transform: none;
+        }
+        50% {
+          transform: scale3d(1.1, 1.1, 1);
+        }
+      }
+
+      @keyframes textFade {
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes btnFade {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #fff;
+        animation: confetti 3s ease-out infinite;
+      }
+
+      @keyframes confetti {
+        0% {
+          transform: translateY(-100vh) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <svg
+        class="checkmark"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 52 52"
+      >
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path
+          class="checkmark__check"
+          fill="none"
+          d="M14.1 27.2l7.1 7.2 16.7-16.8"
+        />
+      </svg>
+      <h1>Thank You!</h1>
+      <p>We appreciate your visit. Hope to see you again soon!</p>
+      <a href="#" class="btn">Return Home</a>
+    </div>
+
+    <script>
+      function createConfetti() {
+        for (let i = 0; i < 50; i++) {
+          const confetti = document.createElement("div");
+          confetti.className = "confetti";
+          confetti.style.left = Math.random() * 100 + "vw";
+          confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+          confetti.style.animationDelay = Math.random() * 2 + "s";
+          document.body.appendChild(confetti);
+        }
+      }
+
+      window.onload = () => {
+        createConfetti();
+        document.querySelector(".btn").addEventListener("click", (e) => {
+          e.preventDefault();
+          window.location.href = "/"; // Change to your home URL
+        });
+      };
+    </script>
+  </body>
+</html>
